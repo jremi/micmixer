@@ -127,17 +127,17 @@ function enable_device_restore() {
 
 # make sure we have pacmd
 # credit: https://stackoverflow.com/a/677212
-command -v pacmd >/dev/null 2>&1 || {
-   echo >&2 "Couldn't find pacmd! Make sure you've got pulseaudio! Aborting.";
-   exit 1;
-}
-command -v pavucontrol >/dev/null 2>&1 || {
-   echo >&2 "Couldn't find pavucontrol! Please install pavucontrol because"\
-            "you'll need it to use the virtual mic (unless you are a pacmd guru"\
-            "of course, in which case you should just comment out this check"\
-            "and run the script again. Aborting for now.";
-   exit 1;
-}
+# command -v pacmd >/dev/null 2>&1 || {
+#    echo >&2 "Couldn't find pacmd! Make sure you've got pulseaudio! Aborting.";
+#    exit 1;
+# }
+# command -v pavucontrol >/dev/null 2>&1 || {
+#    echo >&2 "Couldn't find pavucontrol! Please install pavucontrol because"\
+#             "you'll need it to use the virtual mic (unless you are a pacmd guru"\
+#             "of course, in which case you should just comment out this check"\
+#             "and run the script again. Aborting for now.";
+#    exit 1;
+# }
 
 # obtain default sink and source
 # credit: https://unix.stackexchange.com/a/251920
@@ -146,16 +146,16 @@ default_sink_id=$(get_sink_id ${default_sink})
 default_source=$(pacmd stat | awk -F": " '/^Default source name: /{print $2}')
 default_source_id=$(get_source_id ${default_source})
 
-trap early_exit INT
-echo
-echo "This is what I found on this machine:"
+# trap early_exit INT
+# echo
+# echo "This is what I found on this machine:"
 echo
 echo -e "Default sink:\t\t${default_sink}"
 echo -e "Default source:\t\t${default_source}"
 echo 
-read  -n 1 -p "If this looks good to you, hit Enter to proceed or ^C to exit:"
-echo
-echo "Awesome, let's go!"
+# read  -n 1 -p "If this looks good to you, hit Enter to proceed or ^C to exit:"
+# echo
+# echo "Awesome, let's go!"
 
 
 # In general, we want to achieve mixing by implementing the following routing
@@ -234,22 +234,22 @@ lb3_mod=$(pactl load-module module-loopback \
 check_module ${lb3_mod}
 
 
-trap clean_up INT
-echo
-echo "Wow, looks like it didn't crash!"
-echo
-echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-echo
-echo "If you want to use this to mix in system sounds to your voice chat," \
-     "do the following:"
-echo "  * open the 'pavucontrol' GUI"
-echo "  * go to the 'Recording' tab"
-echo "  * find your browser's recording stream and select 'Monitor of" \
-     "MicAndSystemSink' in the dropdown."
-echo
-echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-echo
-echo
+# trap clean_up INT
+# echo
+# echo "Wow, looks like it didn't crash!"
+# echo
+# echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+# echo
+# echo "If you want to use this to mix in system sounds to your voice chat," \
+#      "do the following:"
+# echo "  * open the 'pavucontrol' GUI"
+# echo "  * go to the 'Recording' tab"
+# echo "  * find your browser's recording stream and select 'Monitor of" \
+#      "MicAndSystemSink' in the dropdown."
+# echo
+# echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+# echo
+# echo
 
-echo "Hope it works for you. Hit ^C to try to undo everything..."
-sleep infinity
+# echo "Hope it works for you. Hit ^C to try to undo everything..."
+# sleep infinity
