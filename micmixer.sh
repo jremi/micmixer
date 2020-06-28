@@ -199,7 +199,7 @@ mas_mon_id=$(get_source_id MicAndSystemSink.monitor)
 # set virtual sinks and sources as new defaults
 echo
 echo "Setting virtual sinks and sources as new defaults..."
-pacmd set-default-sink "$vss_id"
+pacmd set-default-sink "$mas_id"
 pacmd set-default-source "$mas_mon_id"
 
 # make sure newly started playback streams use the new default sink instead of
